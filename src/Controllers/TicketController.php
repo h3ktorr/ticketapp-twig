@@ -4,13 +4,20 @@ namespace Kelvin\TwigApp\Controllers;
 class TicketController {
 
     private static function getTicketsFile(): string {
-        return __DIR__ . '/../../data/tickets.json';
+        // Use /tmp for writable storage
+        $tmpFile = sys_get_temp_dir() . '/tickets.json';
+
+        // Ensure the file exists
+        if (!file_exists($tmpFile)) {
+            file_put_contents($tmpFile, json_encode([]));
+        }
+
+        return $tmpFile;
     }
 
     // Fetch all tickets
     public static function all(): array {
-        $tickets = json_decode(file_get_contents(self::getTicketsFile()), true) ?? [];
-        return $tickets;
+        return json_decode(file_get_contents(self::getTicketsFile()), true) ?? [];
     }
 
     // Find a single ticket by ID
@@ -36,7 +43,7 @@ class TicketController {
             'updatedAt' => time(),
         ];
         array_unshift($tickets, $newTicket);
-        file_put_contents(self::getTicketsFile(), json_encode($tickets));
+        file_put_contents(self::getTicketsFile(), json_encode($tickets, JSON_PRETTY_PRINT));
         return $newTicket;
     }
 
@@ -46,7 +53,7 @@ class TicketController {
         foreach ($tickets as $index => $ticket) {
             if ($ticket['id'] == $id) {
                 $tickets[$index] = array_merge($ticket, $data, ['updatedAt' => time()]);
-                file_put_contents(self::getTicketsFile(), json_encode($tickets));
+                file_put_contents(self::getTicketsFile(), json_encode($tickets, JSON_PRETTY_PRINT));
                 return $tickets[$index];
             }
         }
@@ -57,7 +64,7 @@ class TicketController {
     public static function delete($id): bool {
         $tickets = self::all();
         $tickets = array_filter($tickets, fn($ticket) => $ticket['id'] != $id);
-        file_put_contents(self::getTicketsFile(), json_encode(array_values($tickets)));
+        file_put_contents(self::getTicketsFile(), json_encode(array_values($tickets), JSON_PRETTY_PRINT));
         return true;
     }
 
