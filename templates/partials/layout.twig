@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TicketApp</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  {% include 'partials/header.twig' %}
+  {% include 'partials/sidebar.twig' %}
+
+    {% block content %}{% endblock %}
+
+  {% include 'partials/footer.twig' %}
+</body>
+</html>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const closeBtn = document.getElementById('close-sidebar');
+
+  const sidebarBody = sidebar.querySelector('.sidebar-body');
+
+  // Close sidebar when clicking outside sidebar-body
+  sidebar.addEventListener('click', (e) => {
+    if (e.target === sidebar) {
+      sidebar.classList.remove('sidebar-open');
+    }
+  });
+
+  closeBtn.addEventListener('click', () => {
+    sidebar.classList.remove('sidebar-open');
+    document.body.style.overflow = 'auto';
+  });
+
+  function openSidebar() {
+    sidebar.classList.add('sidebar-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Optional: toggle sidebar on toggleBtn click
+  const toggleBtn = document.getElementById('toggleBtn');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', openSidebar);
+  }
+</script>

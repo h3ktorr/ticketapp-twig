@@ -1,0 +1,21 @@
+<div id="sidebar" class="sidebar {% if sidebarOpen %}sidebar-open{% endif %}">
+  <div class="sidebar-body">
+    <button id="close-sidebar" class="close-sidebar">×</button>
+    <div class="nav-icons">
+      <a href="/" class="nav-link">Home</a>
+      {% if user %}
+        <a href="/dashboard" class="nav-link">Dashboard</a>
+        <a href="/tickets" class="nav-link">Tickets</a>
+        <form method="post" action="/auth/logout">
+          <button type="submit" class="nav-link btn-logout">Logout</button>
+        </form>
+      {% else %}
+        <a href="/auth/login" class="nav-link">Login</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  
+</script>

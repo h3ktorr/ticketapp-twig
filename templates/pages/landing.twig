@@ -1,0 +1,21 @@
+{% extends "partials/layout.twig" %}
+
+{% block content %}
+
+  <main class="hero container">
+    <section class="hero-left">
+      <h1>TicketApp</h1>
+      <p class="lead">Manage support tickets smoothly across teams — built with love.</p>
+      <div class="cta">
+        <a href="/auth/signup" class="btn primary">Get Started</a>
+        <a href="/auth/login" class="btn primary">Login</a>
+      </div>
+    </section>
+    <aside class="hero-right">
+      <div class="decor-circle circle1" aria-hidden></div>
+      <div class="decor-circle circle2" aria-hidden></div>
+    </aside>
+    <img src="/assets/wave.svg" alt="" class="hero-wave" />
+  </main>
+
+{% endblock %}

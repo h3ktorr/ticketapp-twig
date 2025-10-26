@@ -1,0 +1,56 @@
+{% extends "partials/layout.twig" %}
+
+{% block content %}
+<main class="all-form container">
+  <h2>Sign Up</h2>
+
+  {% if errors.general %}
+    <p class="error">{{ errors.general }}</p>
+  {% endif %}
+
+  <form method="post" novalidate>
+    <!-- Name -->
+    <div class="form-group">
+      <input 
+        type="text" 
+        name="name" 
+        placeholder="Full Name" 
+        value="{{ name }}" 
+        class="{{ errors.name ? 'invalid' : '' }}"
+      >
+      {% if errors.name %}
+        <p class="error">{{ errors.name }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <input 
+        type="email" 
+        name="email" 
+        placeholder="Email" 
+        value="{{ email }}" 
+        class="{{ errors.email ? 'invalid' : '' }}"
+      >
+      {% if errors.email %}
+        <p class="error">{{ errors.email }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      <input 
+        type="password" 
+        name="password" 
+        placeholder="Password" 
+        class="{{ errors.password ? 'invalid' : '' }}"
+      >
+      {% if errors.password %}
+        <p class="error">{{ errors.password }}</p>
+      {% endif %}
+    </div>
+
+    <button class="btn" type="submit">Create Account</button>
+  </form>
+</main>
+{% endblock %}

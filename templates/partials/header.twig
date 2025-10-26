@@ -1,0 +1,20 @@
+<header class="site-nav">
+  <div class="nav-left">
+    <a href="/" class="brand">TicketApp</a>
+  </div>
+  <div class="nav-right">
+    <div class="big-screen">
+      <a href="/">Home</a>
+      {% if user %}
+        <a href="/dashboard">Dashboard</a>
+        <a href="/tickets">Tickets</a>
+        <a href="/auth/logout">Logout</a>
+      {% else %}
+        <a href="/auth/login">Login</a>
+      {% endif %}
+    </div>
+    <div class="small-screen">
+      <i id="toggleBtn" class="fa-solid fa-bars"></i>
+    </div>
+  </div>
+</header>

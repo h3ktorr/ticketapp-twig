@@ -1,0 +1,59 @@
+{% extends "partials/layout.twig" %}
+
+{% block content %}
+<main class="all-form container">
+  <h2>{{ isNew ? 'Create Ticket' : 'Edit Ticket' }}</h2>
+
+  <form method="post" novalidate>
+    <!-- Title -->
+    <div class="form-group">
+      <input 
+        type="text" 
+        name="title" 
+        placeholder="Title" 
+        value="{{ ticket.title | default('') }}" 
+        class="{{ errors.title ? 'invalid' : '' }}"
+        data-testid="test-ticket-title"
+      >
+      {% if errors.title %}
+        <p class="error">{{ errors.title }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <textarea 
+        class="description {{ errors.description ? 'invalid' : '' }}" 
+        rows="5" 
+        name="description" 
+        placeholder="Description" 
+        data-testid="test-ticket-description"
+      >{{ ticket.description | default('') }}</textarea>
+      {% if errors.description %}
+        <p class="error">{{ errors.description }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Status -->
+      <label for="status">Status</label>
+      <select 
+        name="status" 
+        class="ticket-status {{ errors.status ? 'invalid' : '' }}" 
+        data-testid="test-ticket-status"
+      >
+        <option value="open" {% if ticket.status == 'open' %}selected{% endif %}>Open</option>
+        <option value="in_progress" {% if ticket.status == 'in_progress' %}selected{% endif %}>In Progress</option>
+        <option value="closed" {% if ticket.status == 'closed' %}selected{% endif %}>Closed</option>
+      </select>
+      {% if errors.status %}
+        <p class="error">{{ errors.status }}</p>
+      {% endif %}
+      {% if errors.general %}
+        <p class="error">{{ errors.general }}</p>
+      {% endif %}
+
+
+    <button class="btn" type="submit" data-testid="test-ticket-submit">Save</button>
+  </form>
+</main>
+{% endblock %}

@@ -1,0 +1,17 @@
+{
+    "name": "kelvin/twig-app",
+    "authors": [
+        {
+            "name": "Kelvin Achi",
+            "email": "kellywizy09@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.19"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kelvin\\TwigApp\\": "src/"
+        }
+    }
+}

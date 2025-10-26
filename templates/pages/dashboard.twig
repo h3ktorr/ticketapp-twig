@@ -1,0 +1,19 @@
+{% extends "partials/layout.twig" %}
+
+{% block content %}
+
+<main class="container dashboard">
+  <h2>Dashboard</h2>
+  <div class="stats-grid">
+    <div class="stat-card">
+      Total 
+      <br>
+      <strong data-testid="stat-total">{{ stats.total }}</strong>
+    </div>
+    <div data-testid="stat-open" class="stat-card">Open <br><strong>{{ stats.open }}</strong></div>
+    <div class="stat-card">In Progress <br><strong data-testid="stat-inprogress">{{ stats.in_progress }}</strong></div>
+    <div class="stat-card">Closed <br><strong data-testid="stat-closed">{{ stats.closed }}</strong></div>
+  </div>
+</main>
+
+{% endblock %}
