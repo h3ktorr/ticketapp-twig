@@ -4,18 +4,25 @@ namespace Kelvin\TwigApp\Controllers;
 class AuthController {
 
     private static function getUsersFile(): string {
-        return __DIR__ . '/../../data/users.json';
+        // Use /tmp for writable storage on Railway
+        $tmpFile = sys_get_temp_dir() . '/users.json';
+
+        // Ensure the file exists
+        if (!file_exists($tmpFile)) {
+            file_put_contents($tmpFile, json_encode([]));
+        }
+
+        return $tmpFile;
     }
 
     private static function readUsers(): array {
-        if (!file_exists(self::getUsersFile())) {
-            file_put_contents(self::getUsersFile(), json_encode([]));
-        }
-        return json_decode(file_get_contents(self::getUsersFile()), true) ?? [];
+        $file = self::getUsersFile();
+        return json_decode(file_get_contents($file), true) ?? [];
     }
 
     private static function writeUsers(array $users): void {
-        file_put_contents(self::getUsersFile(), json_encode($users, JSON_PRETTY_PRINT));
+        $file = self::getUsersFile();
+        file_put_contents($file, json_encode($users, JSON_PRETTY_PRINT));
     }
 
     public static function currentUser(): ?array {
@@ -26,10 +33,7 @@ class AuthController {
         $email = trim($data['email'] ?? '');
         $password = trim($data['password'] ?? '');
 
-        // 🚨 prevent empty login attempts
-        if ($email === '' || $password === '') {
-            return null;
-        }
+        if ($email === '' || $password === '') return null;
 
         $users = self::readUsers();
 
@@ -53,7 +57,6 @@ class AuthController {
         $email = trim($data['email'] ?? '');
         $password = trim($data['password'] ?? '');
 
-        // 🚨 prevent blank submissions
         if ($name === '' || $email === '' || $password === '') {
             throw new \Exception("All fields are required");
         }
