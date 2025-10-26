@@ -15,6 +15,14 @@ The app provides a minimal session-based authentication flow and CRUD for suppor
 - Local JSON storage (no DB required) — `data/users.json` and `data/tickets.json`
 - Server-friendly router (`router.php`) with static asset passthrough for `public/`
 
+## 🚀 Live Demo
+
+[View Live Project](https://ticketapp-twig-production.up.railway.app/)
+
+## 💻 Repository
+
+[GitHub Repo](https://github.com/h3ktorr/ticketapp-twig)
+
 ## 🧱 Tech Stack
 
 - Language: PHP 8+ (tested with PHP 8.x)
