@@ -176,7 +176,7 @@ body {
 .hero-wave {
  position: absolute;
  left: 0;
- bottom: 10px;
+ bottom: 0;
  z-index: 2;
  height: 100px;
  width: 100%;
